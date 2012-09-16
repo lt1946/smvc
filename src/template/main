@@ -1,0 +1,338 @@
+package $ClasspackageName;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.apache.log4j.Logger;
+import $ColumnBeanpackageName;
+import $TableBeanPackageName;
+import $TableDaoPackageName;
+import $ConnToolspackageName;
+
+public class $ClassName {
+	private static final Logger log=Logger.getLogger($ClassName.class);
+	private static BufferedReader br;
+	public static void main(String[] args) throws IOException {
+		init();
+	}
+	public static void init() {
+		log.info("Welcome!\tPlease select number your chioce.\n"+
+		"Commend:" +
+		"\n10.save_$Tablename\t11.update_$Tablename");
+		try {
+			br=new BufferedReader(new InputStreamReader(System.in) );
+			String line="";
+			while((line=br.readLine())!=null){
+				try {
+					int num=Integer.parseInt(line.trim());
+					choice(num);
+				} catch (NumberFormatException e) {
+					log.info("请输入数字：");
+					continue;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	//选择执行命令
+	private static void choice(int num) throws IOException {
+		switch(num){
+			case 10:add$TableBeanName();break;
+			case 11:update$TableBeanName();break;
+			default:again();
+		}
+	}
+	private static	Connection  conn=ConnTools.makeConnection("$dbName");
+	private static void add$TableBeanName() throws IOException {
+		$TableBeanName gur=new $TableBeanName();
+		String id="";
+		List<ColumnBean> list=ConnTools.listColumn3(conn, "$Tablename");
+		for (ColumnBean cb : list) {
+			String cn=cb.getColumnName();
+			if(cn.equals("id"))continue;
+			String ds=cb.getDefaultString();
+			String type=cb.getColumnTypeName();
+			int maxlen=cb.getMaxlength();
+			boolean isNull=cb.isNull();
+			if(cn.equals("createTime"))gur.setCreateTime();
+			else if(type.equals("INT")){
+				int dsi=0; 
+				if(isNull){
+					dsi=Integer.parseInt(ds);
+					log.info("input "+cn+":(default "+dsi+",最大长度:"+maxlen+"位)");
+				}else{
+					try {
+						dsi=Integer.parseInt(ds);
+						log.info("input "+cn+":(default "+dsi+",最大长度:"+maxlen+"位)");
+					} catch (NumberFormatException e) {
+						dsi=-222;
+						log.info("input "+cn+":(最大长度:"+maxlen+"位)");
+					}
+				}
+				while(true){
+					id="";
+					if(!(id=br.readLine().trim()).equals("")){
+						try {
+							int i=Integer.parseInt(id);
+							if(i<=maxlen){
+								gur=setValue(gur,cn,i);break;
+							}else{
+								log.info("输入数字长度超过最大长度！，请重新输入不小于"+maxlen+"长度的数字");
+							}
+						} catch (NumberFormatException e) {
+							log.info("请输入数字：");
+						}
+					}else{
+						if(isNull){
+							if(dsi!=-222){
+								gur=setValue(gur,cn,dsi);
+							}else{
+								gur=setValue(gur,cn,null);
+							}
+							break;
+						}else{
+							if(dsi!=-222){
+								gur=setValue(gur,cn,dsi);break;
+							}else{
+								log.info("输入不许为空！请重新输入!");
+							}
+						}
+					}
+				}
+			}else if(type.equals("BIT")){
+				log.info("input "+cn+":(default "+(ds==null?"0":"1")+")");
+				id="";
+				while((id=br.readLine())!=null){
+					if(!id.trim().equals("")){
+						try {
+							int i=Integer.parseInt(id);
+							gur=setValue(gur,cn,(i==0?0:1));break;
+						} catch (NumberFormatException e) {
+							gur=setValue(gur,cn,1);break;
+						}
+					}else{
+						gur=setValue(gur,cn,0);break;
+					}
+				}
+			}else if(type.equals("CHAR")||type.equals("VARCHAR")||type.equals("TEXT")){
+				if(isNull){
+					ds=(ds==null?"null":ds);
+					log.info("input "+cn+":(default "+ds+",最大长度:"+maxlen+")");
+				}else{
+					log.info("input "+cn+":(最大长度:"+maxlen+")");
+				}
+				id="";
+				while((id=br.readLine())!=null){
+					if(!id.trim().equals("")){
+						if(id.length()<=maxlen){
+							gur=setValue(gur,cn,id);break;
+						}else{
+							log.info("输入数字长度超过最大长度！，请重新输入不小于"+maxlen+"长度的数字");
+						}
+					}else{
+						if(isNull){
+							gur=setValue(gur,cn,ds);break;
+						}else{
+							log.info("输入不许为空！请重新输入!");
+						}
+					}
+				}
+			}
+		}
+		$TableBeanNameDaoImpl.add(gur);
+		if(again("继续添加")){
+			add$TableBeanName();	//继续添加
+		}else again();	//next
+	}
+	//修改
+	@SuppressWarnings("unused")
+	private static void update$TableBeanName()throws IOException  {
+		List<ColumnBean> list=ConnTools.listColumn3(conn, "$TableName");
+		Map<String,ColumnBean> m=new HashMap<String,ColumnBean>();
+		Map<Integer,String> mname=new HashMap<Integer,String>();
+		int d=1;
+		for (ColumnBean cb : list) {
+			if(cb.getColumnName().equals("id"))continue;
+			String cn=cb.getColumnName();
+			m.put(cn, cb);
+			mname.put(d++, cn);
+		}
+		StringBuffer sb=new StringBuffer();
+		sb.append("What parameter do you want to update in $TableBeanName?choice number:\nCommend:");
+		String c[]=ConnTools.listColumn(conn, "$TableName");
+		for (int ii = 1; ii < c.length; ii++) {
+			if((ii-1)%6==0)sb.append("\n");
+			sb.append("\t"+(ii)+"."+c[ii]+",");
+		}
+		log.info("What id of  $TableName are you want to update?(回车:返回)");
+		String id="";
+		while((id=br.readLine())!=null){
+			id=id.trim();
+			if(!id.equals("")){
+				int i=-1;
+				if((i=isNum(id))==-1){
+					update$TableBeanName();
+				}else{
+					if((i=$TableBeanNameDaoImpl.isExists(1,""+i))!=-1){	//判断是否存在id
+						$TableBeanNameDaoImpl.query(i); //显示id的记录
+						while(true){	//循环更新属性
+							log.info(sb);
+							String num="";
+							if((num=br.readLine())!=null){
+								num=num.trim();
+								if(!num.equals("")){
+									int ii=-1;
+									if((ii=isNum(num))==-1){
+										break;
+									}else{
+										if(ii>c.length-1||ii<1)break;
+										else{
+											String name=mname.get(ii);
+											log.info("请输入"+name+"的新值：(回车:返回)");
+											String value="";
+											ColumnBean cb=m.get(name);
+											int len=cb.getMaxlength();
+											String type=cb.getColumnTypeName();
+											while((value=br.readLine())!=null){
+												value=value.trim();
+												if(!value.equals("")){
+													if(type.equals("INT")){
+														try{
+															int vi=Integer.parseInt(value);
+															if(vi>len){
+																log.info("输入的值大于"+len);continue;
+															}
+														}catch(Exception e){
+															log.info("输入的值必须是数字！");continue;
+														}
+													}else if(type.equals("BIT")){
+														try{
+															int vi=Integer.parseInt(value);
+															if(vi!=1||vi!=0){
+																log.info("输入的值必须是0或1");continue;
+															}
+														}catch(Exception e){
+															log.info("输入的值必须是数字！");continue;
+														}
+													}else if(type.equals("CHAR")||type.equals("VARCHAR")||type.equals("TEXT")){
+														if(value.length()>len){
+															log.info("输入长度超过最大长度！，请重新输入不大于"+len+"长度");	continue;
+														}
+													}else{															
+													}
+												}else{
+													if(cb.isNull()){
+														$TableBeanNameDaoImpl.updateName(i,name,cb.getDefaultString());
+														log.info("字段："+name+"更新成功！");
+													}else{
+														log.info("输入不许为空！请重新输入!");continue;
+													}
+												}
+												$TableBeanNameDaoImpl.updateName(i,name,value);
+												break;
+											}
+											if(again("更新其他属性")){
+												continue;	//更新其他属性
+											}else if(again("更新其他id")){
+												log.info("输入要更新的id：");
+												break; 		//更新其他id
+											}
+											else again();	//next
+										}
+									}
+								}
+							}
+						}
+					}else{
+						log.info("该id="+id+"不存在！重新输入要更新的id：");
+						continue;
+					}
+				}
+			}
+		}
+	}
+	//更新其他属性
+	private static boolean again(String name) throws IOException {
+		System.out.println("是否"+name+"?yes or no");
+		String line="";
+		while((line=br.readLine())!=null){
+			if(!line.trim().equals("")){
+				if(line.trim().toLowerCase().equals("yes")){
+					 return true;
+				}else if(line.trim().toLowerCase().equals("no")){
+					 return false;
+				}else{
+					log.info("输入有误！");
+					again(name);
+				}
+			}else {
+				log.info("输入有误！");
+				again(name);
+			}
+		}
+		again(name);
+		return false;
+	}
+	//继续
+	public static void again() throws IOException{
+		log.info("是否继续主菜单操作？yes or no?");
+		String line="";
+		while((line=br.readLine())!=null){
+			if(!line.trim().equals("")){
+				if(line.trim().toLowerCase().equals("yes")){
+					init();break;
+				}else if(line.trim().toLowerCase().equals("no")){
+					exit();break;
+				}else{
+					log.info("输入有误！");
+					again();
+				}
+			}else {
+				log.info("输入有误！");
+				again();
+			}
+		}
+	}
+	//退出
+	public static void exit() throws IOException{
+		log.info("是否退出？yes or no?");
+		String line="";
+		while((line=br.readLine())!=null){
+			if(!line.trim().equals("")){
+				if(line.trim().toLowerCase().equals("yes")){
+					log.info("谢谢使用！再见");
+					System.exit(1);
+				}else if(line.trim().toLowerCase().equals("no")){
+					again();
+				}else{
+					log.info("输入有误！");
+					exit();
+				}
+			}else {
+				log.info("输入有误！");
+				exit();
+			}
+		}
+	}
+	//判断数字
+	public static int isNum(String num){
+		try {
+			int n=Integer.parseInt(num.trim());
+			return n;
+		} catch (NumberFormatException e) {
+			log.info("请输入数字：");
+			return  -1;
+		}
+	}
+	//设置值
+	public static $TableBeanName setValue($TableBeanName gb,String name,Object v){
+		$SetValue
+		return gb;
+	}
+
+}

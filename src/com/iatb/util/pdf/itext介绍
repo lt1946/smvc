@@ -1,0 +1,205 @@
+一、前言
+　　在企业的信息系统中，报表处理一直占比较重要的作用，本文将介绍一种生成PDF报表的Java组件--iText。
+通过在服务器端使用Jsp 或JavaBean生成PDF报表，客户端采用超级连接显示或下载得到生成的报表，这样就很好的解决了B/S系统的报表处理问题。 
+
+　　二、iText简介 
+
+　　iText是著名的开放源码的站点sourceforge一个项目，是用于生成PDF文档的一个java类库。通过iText不仅可以生成PDF或rtf的文档，而且可以将XML、Html文件转化为PDF文件。 
+
+　　iText的安装非常方便，在http://www.lowagie.com/iText /download.html - download 网站上下载iText.jar文件后，只需要在系统的CLASSPATH中加入iText.jar 的路径，在程序中就可以使用iText类库了。 
+
+　　三、建立第一个PDF文档 
+
+　　用iText生成PDF文档需要5个步骤： 
+
+　　①建立com.lowagie.text.Document对象的实例。 
+Document document = new Document();  
+
+　　②建立一个书写器(Writer)与document对象关联，通过书写器(Writer)可以将文档写入到磁盘中。 
+
+PDFWriter.getInstance(document, new FileOutputStream("Helloworld.PDF"));  
+　　③打开文档。 
+document.open();  
+　　④向文档中添加内容。 
+document.add(new Paragraph("Hello World"));  
+　　⑤关闭文档。 
+document.close();  
+　　通过上面的5个步骤，就能产生一个Helloworld.PDF的文件，文件内容为"Hello World"。 
+　　建立com.lowagie.text.Document对象的实例 
+　　com.lowagie.text.Document对象的构建函数有三个，分别是： 
+public Document(); 
+public Document(Rectangle pageSize); 
+public Document(Rectangle pageSize, 
+int marginLeft, 
+int marginRight, 
+int marginTop, 
+int marginBottom);  
+　　构建函数的参数pageSize是文档页面的大小，对于第一个构建函数，页面的大小为A4，同Document(PageSize.A4)的 效果一样；
+对于第三个构建函数，参数marginLeft、marginRight、marginTop、marginBottom分别为左、右、上、下 的页边距。 
+
+　　通过参数pageSize可以设定页面大小、面背景色、以及页面横向/纵向等属性。iText定义了A0-A10、AL、LETTER、 HALFLETTER、_11x17、LEDGER、NOTE、B0-B5、ARCH_A-ARCH_E、FLSA 和FLSE等纸张类型，
+也可以通过 Rectangle pageSize = new Rectangle(144, 720);自定义纸张。通过Rectangle方法rotate() 可以将页面设置成横向。 
+
+　　书写器（Writer）对象 
+
+　　一旦文档(document)对象建立好之后，需要建立一个或多个书写器(Writer)对象与之关联。
+通过书写器(Writer)对象可以 将具体文档存盘成需要的格式，如com.lowagie.text.PDF.PDFWriter可以将文档存成PDF文 件，com.lowagie.text.html.HtmlWriter可以将文档存成html文件。 
+
+　　设定文档属性 
+
+　　在文档打开之前，可以设定文档的标题、主题、作者、关键字、装订方式、创建者、生产者、创建日期等属性，调用的方法分别是： 
+
+
+public boolean addTitle(String title) 
+public boolean addSubject(String subject) 
+public boolean addKeywords(String keywords) 
+public boolean addAuthor(String author) 
+public boolean addCreator(String creator) 
+public boolean addProducer() 
+public boolean addCreationDate() 
+public boolean addHeader(String name, String content)  
+
+　　其中方法addHeader对于PDF文档无效，addHeader仅对html文档有效，用于添加文档的头信息。 
+当新的页面产生之前，可以设定页面的大小、书签、脚注（HeaderFooter）等信息，调用的方法是： 
+
+
+public boolean setPageSize(Rectangle pageSize) 
+public boolean add(Watermark watermark) 
+public void removeWatermark() 
+public void setHeader(HeaderFooter header) 
+public void resetHeader() 
+public void setFooter(HeaderFooter footer) 
+public void resetFooter() 
+public void resetPageCount() 
+public void setPageCount(int pageN)   
+
+　　如果要设定第一页的页面属性，这些方法必须在文档打开之前调用。 
+
+　　对于PDF文档，iText还提供了文档的显示属性，通过调用书写器的setViewerPreferences方法可以控制文档打开时Acrobat Reader的显示属性，如是否单页显示、是否全屏显示、是否隐藏状态条等属性。 
+
+　　另外，iText也提供了对PDF文件的安全保护，通过书写器（Writer）的setEncryption方法，可以设定文档的用户口令、只读、可打印等属性。 
+
+　　添加文档内容 
+
+　　所有向文档添加的内容都是以对象为单位的，如Phrase、Paragraph、Table、Graphic对象等。比较常用的是段落(Paragraph)对象，用于向文档中添加一段文字。 
+四、文本处理 
+
+　　iText中用文本块(Chunk)、短语(Phrase)和段落(paragraph)处理文本。 
+文本块(Chunk)是处理文本的最小单位，有一串带格式（包括字体、颜色、大小）的字符串组成。如以下代码就是产生一个字体为HELVETICA、大小为10、带下划线的字符串： 
+
+
+
+Chunk chunk1 = new Chunk("This text is underlined", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.UNDERLINE));  
+
+
+　　短语(Phrase)由一个或多个文本块(Chunk)组成，短语(Phrase)也可以设定字体，但对于其中以设定过字体的文本块 (Chunk)无效。
+通过短语(Phrase)成员函数add可以将一个文本块(Chunk)加到短语(Phrase)中， 如：phrase6.add(chunk); 
+
+　　段落(paragraph)由一个或多个文本块(Chunk)或短语(Phrase)组成，相当于WORD文档中的段落概念，同样可以设定段 落的字体大小、颜色等属性。
+另外也可以设定段落的首行缩进、对齐方式（左对齐、右对齐、居中对齐）。通过函数setAlignment可以设定段落的对齐 方式，setAlignment的参数1为居中对齐、2为右对齐、3为左对齐，默认为左对齐。 
+
+　　五、表格处理 
+
+　　iText中处理表格的类为：com.lowagie.text.Table和 com.lowagie.text.PDF.PDFPTable，对于比较简单的表格处理可以用com.lowagie.text.Table，但是如果 要处理复杂的表格，
+这就需要com.lowagie.text.PDF.PDFPTable进行处理。这里就类 com.lowagie.text.Table进行说明。 
+
+　　类com.lowagie.text.Table的构造函数有三个： 
+
+　　　①Table (int columns) 
+　　　②Table(int columns, int rows) 
+　　　③Table(Properties attributes) 
+
+　　参数columns、rows、attributes分别为表格的列数、行数、表格属性。创建表格时必须指定表格的列数，而对于行数可以不用指定。 
+
+　　建立表格之后，可以设定表格的属性，如：边框宽度、边框颜色、衬距（padding space 即单元格之间的间距）大小等属性。下面通过一个简单的例子说明如何使用表格，代码如下： 
+
+
+1:Table table = new Table(3); 
+2:table.setBorderWidth(1); 
+3:table.setBorderColor(new Color(0, 0, 255)); 
+4:table.setPadding(5); 
+5:table.setSpacing(5); 
+6:Cell cell = new Cell("header"); 
+7:cell.setHeader(true); 
+8:cell.setColspan(3); 
+9:table.addCell(cell); 
+10:table.endHeaders(); 
+11:cell = new Cell("example cell with colspan 1 and rowspan 2"); 
+12:cell.setRowspan(2); 
+13:cell.setBorderColor(new Color(255, 0, 0)); 
+14:table.addCell(cell); 
+15:table.addCell("1.1"); 
+16:table.addCell("2.1"); 
+17:table.addCell("1.2"); 
+18:table.addCell("2.2"); 
+19:table.addCell("cell test1"); 
+20:cell = new Cell("big cell"); 
+21:cell.setRowspan(2); 
+22:cell.setColspan(2); 
+23:table.addCell(cell); 
+24:table.addCell("cell test2");  
+
+
+　　运行结果如下：
+header
+example cell with colspan 1 and rowspan 2	1.1	2.1
+1.2	2.2
+cell test1	big cell
+cell test2
+
+
+　　代码1-5行用于新建一个表格，如代码所示，建立了一个列数为3的表格，并将边框宽度设为1，颜色为蓝色，衬距为5。 
+
+　　代码6-10行用于设定表格的表头，第7行cell.setHeader(true);是将该单元格作为表头信息显示；第8行 cell.setColspan(3);指定了该单元格占3列；
+为表格添加表头信息时，要注意的是一旦表头信息添加完了之后，必须调用 endHeaders()方法，如第10行，否则当表格跨页后，表头信息不会再显示。 
+
+　　代码11-14行是向表格中添加一个宽度占一列，长度占二行的单元格。 
+
+　　往表格中添加单元格(cell)时，按自左向右、从上而下的次序添加。如执行完11行代码后，表格的右下方出现2行2列的空白，这是再往表格添加单元格时，先填满这个空白，然后再另起一行，15-24行代码说明了这种添加顺序。 
+
+　　六、图像处理 
+
+　　iText中处理表格的类为com.lowagie.text.Image，目前iText支持的图像格式 有：GIF, Jpeg, PNG, wmf等格式，对于不同的图像格式，
+iText用同样的构造函数自动识别图像格式。通过下面的代码分别获得gif、 jpg、png图像的实例。 
+
+
+Image gif = Image.getInstance("vonnegut.gif"); 
+Image jpeg = Image.getInstance("myKids.jpg"); 
+Image png = Image.getInstance("hitchcock.png");  
+
+
+　　图像的位置 
+
+　　图像的位置主要是指图像在文档中的对齐方式、图像和文本的位置关系。IText中通过函数 public void setAlignment(int alignment)进行处理，
+参数alignment为Image.RIGHT、 Image.MIDDLE、Image.LEFT分别指右对齐、居中、左对齐；
+当参数alignment为Image.TEXTWRAP、 Image.UNDERLYING分别指文字绕图形显示、图形作为文字的背景显示。
+这两种参数可以结合以达到预期的效果，如 setAlignment(Image.RIGHT|Image.TEXTWRAP)显示的效果为图像右对齐，文字围绕图像显示。 
+
+　　图像的尺寸和旋转 
+
+　　如果图像在文档中不按原尺寸显示，可以通过下面的函数进行设定： 
+
+
+public void scaleAbsolute(int newWidth, int newHeight) 
+public void scalePercent(int percent) 
+public void scalePercent(int percentX, int percentY)  
+
+
+　　函数public void scaleAbsolute(int newWidth, int newHeight)直接设定显示尺寸；函 数public void scalePercent(int percent)设定显示比例，如scalePercent(50)表示显示的大小为原尺 寸的50%；
+而函数scalePercent(int percentX, int percentY)则图像高宽的显示比例。 
+
+　　如果图像需要旋转一定角度之后在文档中显示，可以通过函数public void setRotation(double r)设定，参数r为弧度，如果旋转角度为30度，则参数r= Math.PI / 6。 
+
+　　七、中文处理 
+
+　　默认的iText字体设置不支持中文字体，需要下载远东字体包iTextAsian.jar，否则不能往PDF文档中输出中文字体。通过下面的代码就可以在文档中使用中文了： 
+
+
+BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED); 
+com.lowagie.text.Font FontChinese = new com.lowagie.text.Font(bfChinese, 12, com.lowagie.text.Font.NORMAL); 
+Paragraph pragraph=new Paragraph("你好", FontChinese);   
+
+
+　　八、后计 
+
+　　iText还有很多高级的功能，这里就不一一介绍了，具体开发时可参考发布的文档。总的来说，iText是一套java环境下不错的制作 PDF的组件。因为iText支持jsp/javabean下的开发，这使得B/S应用中的报表问题能得到很好的解决。由于iText毕竟不是专门为制作 报表设计，所有报表中的内容、格式都需要通过写代码实现，相对于那些专业的支持可视化设计的报表软件来说，编程的工作量就有一定程度的增加。

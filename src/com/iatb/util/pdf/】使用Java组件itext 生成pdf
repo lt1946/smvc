@@ -1,0 +1,146 @@
+ package  test;
+
+ import  java.awt.Color;
+ import  java.io.FileOutputStream;
+
+ import  com.lowagie.text.Cell;
+ import  com.lowagie.text.Chapter;
+ import  com.lowagie.text.Document;
+ import  com.lowagie.text.Font;
+ import  com.lowagie.text.FontFactory;
+ import  com.lowagie.text.List;
+ import  com.lowagie.text.ListItem;
+ import  com.lowagie.text.PageSize;
+ import  com.lowagie.text.Paragraph;
+ import  com.lowagie.text.Section;
+ import  com.lowagie.text.Table;
+ import  com.lowagie.text.pdf.PdfWriter;
+
+ public   class  ITextTest   {
+     public   static   void  main(String[] args)   {
+         try    {
+             /** */ /** 
+             * 实例化文档对象 第一个参数是页面大小。接下来的参数分别是左、右、上和下页边距。但是还没有定义该文档的类型。
+             * 它取决于所创建的写入器的类型。对于我们的示例，选择了com.lowagie.text.pdf.PdfWriter。 其他写入器为
+             * HtmlWriter、RtfWriter、XmlWriter 等等。它们的名称解释了它们的实际用途。
+              */ 
+            Document document  =   new  Document(PageSize.A4,  50 ,  50 ,  50 ,  50 );
+             /** */ /** 
+             * 创建 PdfWriter 对象,第一个参数是对文档对象的引用，第二个参数是文件的实际名称，在该名称中还会给出其输出路径。
+              */ 
+            PdfWriter writer  =  PdfWriter.getInstance(document,
+                     new  FileOutputStream( " D:\\ITextTest.pdf " ));
+             /** */ /** 
+             * 打开文档以写入内容
+              */ 
+            document.open();
+             /** */ /** 
+             * 现在，将在文档的第一页上添加一些文本。通过 com.lowagie.text.Paragraph
+             * 来添加文本。可以用文本及其默认的字体、颜色、大小等等设置来创建一个默认段落。
+             * 或者，也可以设置自己的字体。下面让我们来看看这两种做法。
+             * 
+             * 创建段落对象
+             * 
+              */ 
+            document.add( new  Paragraph( " First page of the document. " ));
+            document
+                    .add( new  Paragraph(
+                             " Some more text on the first page with different color and font type. " ,
+                            FontFactory.getFont(FontFactory.COURIER,  14 ,
+                                    Font.BOLD,  new  Color( 255 ,  150 ,  200 ))));
+
+             /** */ /** 
+             * 您已经看到了如何向 PDF文档中添加纯文本。 接下来，需要向文档中添加一些复杂的元素。我们开始创建一个新的章节。
+             * 章节是一个特殊的小节，默认情况下，章节从一个新的页面开始，并显示一个默认的编号。
+             * 
+             * 创建章节对象
+              */ 
+            Paragraph title1  =   new  Paragraph( " Chapter 1 " , FontFactory.getFont(
+                    FontFactory.HELVETICA,  18 , Font.BOLDITALIC,  new  Color( 0 ,  0 ,
+                             255 )));
+            Chapter chapter1  =   new  Chapter(title1,  1 );
+            chapter1.setNumberDepth( 0 );
+             /** */ /** 
+             * 在上面的代码中，创建了一个新的章节对象，chapter1，其标题为 “This is Chapter 1”，将编号级别设为 0
+             * 就不会在页面上显示章节编号。
+             * 
+             * 小节是章节的子元素。在下面的代码中，创建了一个标题为 “This is Section 1 in Chapter 1”
+             * 的小节。为在该小节下添加一些文本，创建了另一个段落对象，someSectionText，并将其添加到小节对象中。
+             * 
+             * 创建小节对象
+             * 
+              */ 
+            Paragraph title11  =   new  Paragraph( " This is Section 1 in Chapter 1 " ,
+                    FontFactory.getFont(FontFactory.HELVETICA,  16 , Font.BOLD,
+                             new  Color( 255 ,  0 ,  0 )));
+            Section section1  =  chapter1.addSection(title11);
+            Paragraph someSectionText  =   new  Paragraph(
+                     " This text comes as part of section 1 of chapter 1. " );
+            section1.add(someSectionText);
+            someSectionText  =   new  Paragraph( " Following is a 3 X 2 table. " );
+            section1.add(someSectionText);
+             /** */ /** 
+             * 在添加表格之前，我们先看一下文档的样子。添加下面两行代码以关闭文档，然后编译并执行程序以生成 PDF
+             * 文档：document.add(chapter1);document.close();
+              */ 
+ 
+              /** */ /** 
+             * 接下来，创建一个表格对象。创建一个包含行列矩阵的表格。行中的单元格可以跨多个列。同样地，列中的单元格也可以跨多个行。 因此，一个
+             * 3 x 2 的表格实际上不一定有 6 个单元格。
+             * 
+             * 创建表格对象
+              */ 
+            Table t  =   new  Table( 3 ,  2 );
+            t.setBorderColor( new  Color( 220 ,  255 ,  100 ));
+            t.setPadding( 5 );
+            t.setSpacing( 5 );
+            t.setBorderWidth( 1 );
+            Cell c1  =   new  Cell( " header1 " );
+            t.addCell(c1);
+            c1  =   new  Cell( " Header2 " );
+            t.addCell(c1);
+            c1  =   new  Cell( " Header3 " );
+            t.addCell(c1);
+            t.addCell( " 1.1 " );
+            t.addCell( " 1.2 " );
+            t.addCell( " 1.3 " );
+            section1.add(t);
+
+             /** */ /** 
+             * 在上面的代码中，创建了一个表格对象，t，它有三列、两行。然后设置表格的边框颜色。填充用于设置单元格中文本间的间隔以及单元格的边界。
+             * 间隔指的是相邻单元格间的边界。接下来，将创建三个单元格对象，每个单元格中的文本都各不相同。接下来，将它们添加到表格中。
+             * 将它们添加到第一行中，从第一列开始，移到同一行中的下一列。一旦该行创建完成，就将下一个单元格添加到下一行的第一列中。
+             * 也可以通过只提供单元格的文本将单元格添加到表格中，例如，t.addCell("1.1");。最后，将表格对象添加到小节对象中。
+             * 
+             * 最后，我们来看一下如何将列表添加到 PDF 文档中。列表包含一定数量的
+             * ListItem。可以对列表进行编号，也可以不编号。将第一个参数设置为 true 表明想创建一个要进行编号的列表。
+             * 
+             * 创建列表对象
+              */ 
+            List l  =   new  List( true ,  true ,  10 );
+            l.add( new  ListItem( " First item of list " ));
+            l.add( new  ListItem( " Second item of list " ));
+            section1.add(l);
+
+             /** */ /** 
+             * 我们已经向 chapter1 对象中添加了所需的对象。因此，已经没有其他要添加到 chapter1 中的元素了，现在可以将
+             * chapter1 添加到主 document 中了。与在示例应用程序中所做的一样，还要在这时关闭文档对象。
+             * 
+             * 向主文档中添加章节
+              */ 
+            document.add(chapter1);
+            document.close();
+
+        }   catch  (Exception e2)   {
+            System.out.println(e2.getMessage());
+        } 
+          /** */ /** 
+         * 您已经看到了一些生成 PDF 的基本元素。iText的美妙之处是相同元素的语法可以供不同类型的写入器使用。
+         * 而且，写入器的输出可以重定向到控制台（当写入器类型是 XML 和 HTML时）、
+         * servlet 的输出流（在对 PDF 文档的 Web 请求作出响应时）或者是其他类型的OutputStream。
+         * 当响应相同，但其类型随所请求的是 PDF、RTF、HTML 或 XML 文档而有所不同时，使用 iText是非常方便的。
+         * iText 允许用户创建水印，对文档进行加密以及设置其他输出细节。
+          */ 
+    } 
+} 
+ 

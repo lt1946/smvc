@@ -1,0 +1,24 @@
+package _$classPackage_;
+
+import java.util.List;
+import _$TableBeanPackageName_;
+
+/**
+ * _$TableBeanName_管理业务逻辑接口
+ * @author Administrator
+ * @since  _$date_
+ */
+public interface _$TableBeanNameService_ {
+	/** 浏览 _$TableBeanName_*/
+	public List<_$TableBeanName_> browse_$TableBeanName_();
+	/** 装载指定的 _$TableBeanName_*/
+	public _$TableBeanName_ load_$TableBeanName_(Integer id);
+	/** 删除指定的 _$TableBeanName_*/	
+	public boolean delete_$TableBeanName_(Integer id);
+	/** 新增 _$TableBeanName_*/
+	public boolean save_$TableBeanName_(_$TableBeanName_ _$TableAsila_);
+	/** 修改 _$TableBeanName_*/	
+	public boolean update_$TableBeanName_(_$TableBeanName_ _$TableAsila_);
+	/** 更新_$TableBeanName_:id的状态 */
+	public void updateStatus(int id,int status);
+}

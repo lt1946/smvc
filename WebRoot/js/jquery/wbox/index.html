@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>jQuery弹出框插件wBox1.0实例 | jQuery plugin wBox Demo | By WYQ</title>  
+<script type="text/javascript" src="jquery1.4.2.js"></script> 
+<script type="text/javascript" src="mapapi.js"></script> 
+<script type="text/javascript" src="wbox.js"></script> 
+<link rel="stylesheet" type="text/css" href="wbox/wbox.css" />
+<style type="text/css">
+	body{
+		width:920px;
+		margin:0 auto;
+		background-color:#ffffff;
+	}
+	#wBoxInfo{
+		width:918px;
+	}
+	#wBoxInfo h1{
+		text-align:center;
+	}
+	#wBoxUL,#wBoxChange{
+		width:400px;
+		float:left;
+	}
+	#wBoxDemos{
+		width:918px;
+		float:left;
+	}
+	#wBoxDemos li{
+		width:450px;
+		float:left;
+	}
+	.code{
+		margin-left:30px;
+	}
+	h2{
+		font-size:15px;
+	}
+	.demo {
+		width:360px;
+	}
+</style>
+</head> 
+<body>
+	<div><h2>Ajax加载内容</h2><div class="code">代码：<br/>$("#ajax").wBox({requestType: "ajax",target:"1.html"});<br/><a id="ajax" href="javascript:$('#ajax').wBox({requestType: 'ajax',target:'1.html'});">ajax 1.html</a></div></div>
+	<div><h2>没有标题的弹出框</h2><div class="code">代码：<br/>$("#noTitle").wBox({noTitle:true,html:"&lt;div class='demo'&gt;这是一个没有标题的wBox<br/>ESC键关闭，或者双击背景关闭&lt;/div&gt;"});<br/><a id="noTitle" href="1.html">没有标题的弹出框</a></div></div>
+ <script type="text/javascript"> 
+   $("#ajax").wBox({
+    requestType: "ajax",
+	target:"1.html"
+   });
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+package $ClasspackageName;
+
+import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.actions.DispatchAction;
+import $daopackageName;
+import $tablebeanpackageName;
+import com.iatb.util.Json;
+import com.iatb.util.MyString;
+
+/**
+ * @Author Administrator
+ * @Date  $date
+ */
+public class $className extends DispatchAction {
+
+	private  $daoName dao;
+	
+	public ActionForward list(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		request.setCharacterEncoding("gbk");
+		response.setContentType("text/html;charset=gbk");
+		PrintWriter out =response.getWriter();
+		int page=0;
+		int rows=20;
+		if(request.getParameter("page")!=null){
+			page=Integer.parseInt( request.getParameter("page"));
+			rows=Integer.parseInt(request.getParameter("rows"));
+		}
+		List jobs=dao.queryList( rows,(page-1)*rows);
+		String jobsjson=Json.list2json(jobs);
+		out.print("{\"total\":"+dao.getAllCount()+",\"rows\":"+jobsjson+"}");
+		return null;
+	}
+	/**
+	 * Ìí¼Ó
+	 */
+	public ActionForward add(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		request.setCharacterEncoding("gbk");
+		response.setContentType("text/html;charset=gbk");
+		PrintWriter out =response.getWriter();
+		$formBeanName gb=($formBeanName) form;
+		out.print(dao.add(gb));
+		return null;
+	}
+	public void set$daoName($daoName dao) {
+		this.dao = dao;
+	}
+
+
+}

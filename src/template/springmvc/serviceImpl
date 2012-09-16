@@ -1,0 +1,55 @@
+package _$classPackage_;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import _$daopackageName_;
+import _$TableBeanPackageName_;
+import _$servicepackageName_;
+import org.apache.log4j.Logger;
+
+/**
+ * _$TableBeanName_管理业务逻辑接口实现
+ * @author Administrator
+ * @since  _$date_
+ */
+@Service("_$TableAsilaService_")
+public class _$TableBeanName_ServiceImpl implements _$TableBeanName_Service {
+
+	private static final Logger log=Logger.getLogger(_$TableBeanName_ServiceImpl.class);
+	/** 通过依赖注入DAO组件实例 */
+	@Autowired
+	$TableBeanNameDao _$TableAsilaDao_;
+	/** 新增_$TableBeanName_ */	
+	public boolean save_$TableBeanName_(_$TableBeanName_ columns){
+			return _$TableAsilaDao_.save(columns);
+	}
+	/** 修改_$TableBeanName_ */	
+	public boolean update_$TableBeanName_(_$TableBeanName_ columns){
+		return _$TableAsilaDao_.update(columns);
+	}
+
+	/** 浏览_$TableBeanName_ */
+	public List<_$TableBeanName_> browse_$TableBeanName_(){
+		return _$TableAsilaDao_.listAll();
+	}
+	
+	/** 删除指定的_$TableBeanName_ */
+	public boolean delete_$TableBeanName_(Integer id){
+		return _$TableAsilaDao_.delete(id);
+	}
+
+	/** 装载指定的_$TableBeanName_ */
+	public _$TableBeanName_ load_$TableBeanName_(Integer id){
+		return (_$TableBeanName_)_$TableAsilaDao_.load(id);
+	}
+
+	/**
+	 * 更新_$TableBeanName_:id的状态
+	 * @param id
+	 * @param status
+	 */
+	public void updateStatus(int id,int status){
+		_$TableAsilaDao_.updateStatus(id,status);
+	}
+}

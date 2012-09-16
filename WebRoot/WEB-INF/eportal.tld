@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+   <!-- 标签库的版本号 --> 
+  <tlib-version>1.0</tlib-version>
+  <!-- 标签库的默认前缀 -->
+  <short-name>eportal</short-name>
+  <!-- 标签库的默认URI -->
+  <uri>/eportal</uri>
+  
+ <!-- 商品类别列表标签 -->
+ <tag>
+    <description>商品类别列表标签</description>
+    <name>category</name>
+    <tag-class>com.iatb.tld.CategoryListTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>1-最新商品类别列表,2-促销商品类别列表,默认值为1</description>
+        <name>listtype</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>          
+ </tag>
+ 
+ <!-- 商品列表标签 -->
+ <tag>
+    <description>商品列表标签</description>
+    <name>merlist</name>
+    <tag-class>com.iatb.tld.MerListTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>基本URL</description>
+        <name>baseurl</name>
+        <required>true</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>         
+    <attribute>
+        <description>1-最新商品列表,2-促销商品列表,默认值为1</description>
+        <name>listtype</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+        <description>商品列表条数,默认为10条</description>
+        <name>size</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>页号,默认为第一页</description>
+        <name>pageNo</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute>
+        <description>商品图片宽度,默认值94</description>
+        <name>picWidth</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>             
+  </tag>
+  
+ <!-- 商品列表标签 -->
+ <tag>
+    <description>商品列表标签</description>
+    <name>mermore</name>
+    <tag-class>com.iatb.tld.MerMoreTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>基本URL</description>
+        <name>baseurl</name>
+        <required>true</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>         
+    <attribute>
+        <description>1-最新商品列表,2-促销商品列表,默认值为1</description>
+        <name>listtype</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+        <description>商品列表条数,默认为6条</description>
+        <name>size</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>页号,默认为第一页</description>
+        <name>pageNo</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute>
+        <description>商品图片宽度,默认值76</description>
+        <name>picWidth</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>商品分类ID,默认为所有分类</description>
+        <name>cateid</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>                 
+  </tag>
+  
+ <!-- 商品搜索标签 -->
+ <tag>
+    <description>商品搜索标签</description>
+    <name>searchmer</name>
+    <tag-class>com.iatb.tld.SearchMerTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>基本URL</description>
+        <name>baseurl</name>
+        <required>true</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>         
+    <attribute>
+        <description>1-最新商品列表,2-促销商品列表,默认值为1</description>
+        <name>listtype</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+        <description>商品列表条数,默认为6条</description>
+        <name>size</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>页号,默认为第一页</description>
+        <name>pageNo</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute>
+        <description>商品图片宽度,默认值76</description>
+        <name>picWidth</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>搜索关键字</description>
+        <name>keyword</name>
+        <required>true</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>                 
+  </tag>  
+  
+ <!-- 视频商品列表标签 -->
+ <tag>
+    <description>视频商品列表标签</description>
+    <name>videolist</name>
+    <tag-class>com.iatb.tld.VideoListTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>基本URL</description>
+        <name>baseurl</name>
+        <required>true</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>         
+    <attribute>
+        <description>商品列表条数,默认为10条</description>
+        <name>size</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>页号,默认为第一页</description>
+        <name>pageNo</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute>
+        <description>商品图片宽度,默认值120</description>
+        <name>picWidth</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>             
+  </tag>     
+
+ <!-- 带遮罩的网页对话框标签 -->
+ <tag>
+    <description>带遮罩的网页对话框标签</description>
+    <name>msgdialog</name>
+    <tag-class>com.iatb.tld.MsgDialogTag</tag-class>
+    <!-- 标签体可以是静态HTML元素，表达式语言，但不允许出现JSP脚本 -->
+    <body-content>scriptless</body-content>
+    <attribute>
+        <description>对话框标题文字,默认为"温馨提示"</description>
+        <name>title</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>遮罩的高度,默认为屏幕的高度,即100%</description>
+        <name>height</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>对话框的顶部距离,默认为100px</description>
+        <name>top</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute>
+        <description>对话框的宽度,默认为500px</description>
+        <name>boxwidth</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>             
+    <attribute>
+        <description>基本URL</description>
+        <name>basepath</name>
+        <required>true</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>临时ID后缀,避免ID冲突,默认为系统时间的毫秒数</description>
+        <name>tmpid</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>         
+  </tag>
+  
+ <!-- FLV在线播放器标签 -->
+ <tag>
+    <description>FLV在线播放器标签</description>
+    <name>flvplayer</name>
+    <tag-class>com.iatb.tld.FlvPlayerTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>red5服务器应用的完整访问路径</description>
+        <name>red5FullUrl</name>
+        <required>true</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>red5服务器的IP地址</description>
+        <name>red5ServerIp</name>
+        <required>true</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>FLV文件名</description>
+        <name>flvFilename</name>
+        <required>true</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>播放器封面图片文件,默认为red5服务器应用下的cover.jpg</description>
+        <name>picFilename</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>     
+    <attribute>
+        <description>播放器宽度,单位:像素,默认400</description>
+        <name>width</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>             
+    <attribute>
+        <description>播放器高度,单位:像素,默认300</description>
+        <name>height</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+  </tag>  
+  
+ <!-- 文本新闻列表标签 -->  
+  <tag>
+    <description>文本新闻列表标签</description>
+    <name>textnews</name>
+    <tag-class>com.iatb.tld.TextnewsTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>栏目编号,多个栏目编号中间用号码分隔,如:I_001,I_002</description>
+        <name>section</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+        <description>新闻类型:0-最新新闻 1-头条新闻 2-热点新闻 3-精彩推荐 4-所有类型</description>
+        <name>newstype</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>显示新闻的条数</description>
+        <name>number</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>页号,默认为1(第一页)</description>
+        <name>pageNo</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+     <attribute>
+        <description>标题的字数</description>
+        <name>titlelen</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>是否要分隔符:0不需要(默认) 1需要</description>
+        <name>split</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>前缀图片:0 为一个点字符 _.jpg之类为顺序图片 其它为指定图片</description>
+        <name>prex</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>基本URL</description>
+        <name>baseurl</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>日期格式，默认为无，y:年 M:月 d:日 k:时 m:分 s:秒 如：yyyy-MM-dd kk:mm:ss 需要外部提供.newslist_title与.newslist_date两个CSS样式来控制显示效果</description>
+        <name>dateFormat</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+  </tag>
+  
+ <!-- 新闻搜索标签 -->  
+  <tag>
+    <description>新闻搜索标签</description>
+    <name>searchnews</name>
+    <tag-class>com.iatb.tld.SearchNewsTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>搜索关键字</description>
+        <name>keyword</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>显示新闻的条数</description>
+        <name>number</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>页号,默认为1(第一页)</description>
+        <name>pageNo</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+     <attribute>
+        <description>标题的字数</description>
+        <name>titlelen</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>是否要分隔符:0不需要(默认) 1需要</description>
+        <name>split</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>前缀图片:0 为一个点字符 _.jpg之类为顺序图片 其它为指定图片</description>
+        <name>prex</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>基本URL</description>
+        <name>baseurl</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>日期格式，默认为无，y:年 M:月 d:日 k:时 m:分 s:秒 如：yyyy-MM-dd kk:mm:ss 需要外部提供.newslist_title与.newslist_date两个CSS样式来控制显示效果</description>
+        <name>dateFormat</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+  </tag>  
+  
+<!-- 图片新闻列表标签-->
+<tag>
+    <description>图片新闻列表标签</description>
+    <name>picnews</name>
+    <tag-class>com.iatb.tld.PicnewsTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>栏目编号,多个栏目编号中间用号码分隔,如:I_001,I_002</description>
+        <name>section</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+        <description>新闻类型:0-最新新闻 1-头条新闻 2-热点新闻 3-精彩推荐 4-所有类型</description>
+        <name>newstype</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>图片宽</description>
+        <name>width</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>图片高</description>
+        <name>height</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>新闻数目</description>
+        <name>number</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>是否需要标题 0:不需要标题　１：需要标题</description>
+        <name>hastitle</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>标题字数</description>
+        <name>titlelen</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>基本URL</description>
+        <name>baseurl</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+  </tag>
+  
+<!-- 幻灯片新闻列表标签 -->  
+  <tag>
+    <description>幻灯片新闻列表标签</description>
+    <name>slidenews</name>
+    <tag-class>com.iatb.tld.SlidenewsTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>栏目编号,多个栏目编号中间用号码分隔,如:I_001,I_002</description>
+        <name>section</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>新闻类型:0-最新新闻 1-头条新闻 2-热点新闻 3-精彩推荐 4-所有类型</description>
+        <name>newstype</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+        <description>显示新闻的条数</description>
+        <name>number</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>幻灯片宽度</description>
+        <name>width</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>幻灯片高度</description>
+        <name>height</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>标题字数</description>
+        <name>titlelen</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>基本URL</description>
+        <name>baseurl</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute>
+        <description>在本页中当前幻灯片的序号</description>
+        <name>slideno</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>     
+  </tag>
+
+<!-- 相关新闻列表标签 -->   
+  <tag>
+    <description>相关新闻列表标签</description>
+    <name>aboutnews</name>
+    <tag-class>com.iatb.tld.AboutNewsTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>关键字,具有相同关键字的新闻被视为相关新闻</description>
+        <name>keywords</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>当前新闻的ID号,以便在相关新闻列表中去除当前新闻</description>
+        <name>currentId</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>         
+    <attribute>
+        <description>显示新闻的条数</description>
+        <name>number</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>页号,默认为1(第一页)</description>
+        <name>pageNo</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+     <attribute>
+        <description>标题的字数</description>
+        <name>titlelen</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>是否要分隔符:0不需要(默认) 1需要</description>
+        <name>split</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>前缀图片:0 为一个点字符 _.jpg之类为顺序图片 其它为指定图片</description>
+        <name>prex</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>基本URL</description>
+        <name>baseurl</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>日期格式，默认为无，y:年 M:月 d:日 k:时 m:分 s:秒 如：yyyy-MM-dd kk:mm:ss 需要外部提供.newslist_title与.newslist_date两个CSS样式来控制显示效果</description>
+        <name>dateFormat</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+  </tag>
+  
+<!-- 文本新闻列表分页控制标签 -->   
+  <tag>
+    <description>文本新闻列表分页控制标签</description>
+    <name>textnewspage</name>
+    <tag-class>com.iatb.tld.TextnewsPageTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>栏目编号,多个栏目编号中间用号码分隔,如:I_001,I_002</description>
+        <name>section</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+        <description>新闻类型:0-最新新闻 1-头条新闻 2-热点新闻 3-精彩推荐 4-所有类型</description>
+        <name>newstype</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>每页新闻条数,,默认值24</description>
+        <name>pageSize</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>页号,默认为1(第一页)</description>
+        <name>pageNo</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+        <description>分页调用的URL,此项为必填项</description>
+        <name>url</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  
+<!-- 新闻搜索分页控制标签 -->   
+  <tag>
+    <description>新闻搜索分页控制标签</description>
+    <name>searchnewspage</name>
+    <tag-class>com.iatb.tld.SearchNewsPageTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>搜索关键字</description>
+        <name>keyword</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>每页新闻条数,,默认值24</description>
+        <name>pageSize</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>页号,默认为1(第一页)</description>
+        <name>pageNo</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+        <description>分页调用的URL,此项为必填项</description>
+        <name>url</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>  
+  
+<!-- 商品列表分页控制标签 -->   
+  <tag>
+    <description>商品列表分页控制标签</description>
+    <name>merpage</name>
+    <tag-class>com.iatb.tld.MerPageTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>1-最新商品列表,2-促销商品列表,默认值为1</description>
+        <name>listtype</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>每页商品条数,默认值6</description>
+        <name>pageSize</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>页号,默认为1(第一页)</description>
+        <name>pageNo</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+        <description>分页调用的URL,此项为必填项</description>
+        <name>url</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>商品分类ID,默认为所有分类</description>
+        <name>cateid</name>
+        <required>false</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>     
+  </tag>
+  
+<!-- 商品搜索分页控制标签 -->   
+  <tag>
+    <description>商品搜索分页控制标签</description>
+    <name>searchmerpage</name>
+    <tag-class>com.iatb.tld.SearchMerPageTag</tag-class>
+	<!-- 标签体为空 -->    
+    <body-content>empty</body-content>
+    <attribute>
+        <description>1-最新商品列表,2-促销商品列表,默认值为1</description>
+        <name>listtype</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>每页商品条数,默认值6</description>
+        <name>pageSize</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>页号,默认为1(第一页)</description>
+        <name>pageNo</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+        <description>分页调用的URL,此项为必填项</description>
+        <name>url</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>搜索关键字</description>
+        <name>keyword</name>
+        <required>true</required>
+        <!-- 可以使用JSP表达式 -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>     
+  </tag>                
+</taglib>

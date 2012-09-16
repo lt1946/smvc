@@ -1,0 +1,26 @@
+1:修改Daoimpl，pojo模板生成
+2：修改限制抓取job，为spring jdbc
+1.重构SpiderServiceImpl
+1.添加普通抓取job
+1.更新生成bean，daoimpl的模板。
+2.基本完成spiderWebBean Job.
+1.修改log4j配置
+1.修改配置文件
+2.添加admin，测试
+1.修改配置文件
+2.添加admin 测试文件
+3.开始整合eportal
+1.修改jdbcDao
+1.创建管理员后台访问路径。
+2.添加国际化访问
+1.整合登陆，
+2.修改springmvc jsp目录
+3.添加extremetable jsp table组件测试页面
+1.更新login.jsp,index.jsp
+1.调整菜单栏样式，改用ztree3.0
+1.修改menu在ie显示bug
+1.自动生成类，增加service，serviceImpl，添加判断是否改动过。
+1.exclude 重复的注释类
+1.更新：抓取wb为空或出错跳出，继续下个wb。
+1.更新job时间，更新抓取代码。
+1.更改pornjob下载盘符d:

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="src"/>
+	<buildpathentry kind="con" path="org.eclipse.dltk.mod.launching.INTERPRETER_CONTAINER"/>
+	<buildpathentry kind="con" path="org.ebayopensource.vjet.eclipse.core.SDK_CONTAINER/DEFUALT_SDK"/>
+	<buildpathentry external="true" kind="lib" path="D:/java/MyEclipse/Common/plugins/com.genuitec.eclipse.j2eedt.core_10.0.0.me201110301321/data/libraryset/EE_5/jsf-impl.jar"/>
+	<buildpathentry kind="lib" path="/Library/FrameWork/SSH/Struts2/struts2-core-2.1.6.jar"/>
+	<buildpathentry kind="lib" path="/Library/FrameWork/JavaScript/DWR/2.0.6/dwr.jar"/>
+</buildpath>

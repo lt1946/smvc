@@ -1,0 +1,79 @@
+package $ClasspackageName;
+
+import java.util.List;
+import java.util.Map;
+import $TableBeanPackageName;
+
+/**
+ * @Author Administrator
+ * @Date  $date
+ */
+public interface $ClassName {
+	
+	/**
+	 * 添加
+	 * @param $Tablename
+	 */
+	public String add($TableBeanName $TableAsila);
+	/**
+	 * 查询
+	 * @param id
+	 * @return
+	 */
+	public  List<$TableBeanName> query(int id);
+	/**
+	 * 查询结果集
+	 * @param num $ColumnList
+	 * @param value
+	 * @return
+	 */
+	public  List<$TableBeanName> queryList(int num,int value);
+	
+	/**
+	 * 分页查询
+	 * @param num	个数
+	 * @param pre	开始页数
+	 * @return	
+	 */
+	public  List<Map<String ,Object>> query(int num,int pre);
+	/**
+	 * 更新id中num属性值为value
+	 * @param id
+	 * @param name
+	 * @param value
+	 */
+	public  void updateName(int id,String name,String value);
+	/**
+	 * 判断sql是否存在
+	 * @param sql
+	 * @return
+	 */
+	public  boolean exists(String sql);
+	/**
+	 * 判断num属性值value是否存在,返回id;  
+	 * @param num	($ColumnList)
+	 * @param value	
+	 * @return 
+	 */
+	public  int isExists(int num,String value);
+	/**
+	 * 更新
+	 * @param id
+	 * @return
+	 */
+	public  void update(String sql);
+	/**
+	 * 查询sql
+	 * @param id
+	 * @return List
+	 */
+	public  List<$TableBeanName> query(String sql);
+	/**
+	 * 统计总个数
+	 */
+	public int getAllCount() ;
+	/**
+	 * 删除标记id
+	 */
+	public String del(int id);
+}
