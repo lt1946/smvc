@@ -27,7 +27,7 @@ public class GBean {
 	/**API正常**/public final static Integer API_HEALTH_NORMAL=0;				
 	/**API不能打开次数-1**/public final static Integer API_HEALTH_NOPEN=-1;			
 	
-	/**API没有商品次数-1**/public final static Integer API_GOODS_NORMAL=0;			
+//	/**API没有商品次数-1**/public final static Integer API_GOODS_NORMAL=0;			
 	/**API没有商品次数-1**/public final static Integer API_GOODS_NO=-1;			
 	/**API有商品次数1**/public final static Integer API_GOODS_OK=1;		
 	

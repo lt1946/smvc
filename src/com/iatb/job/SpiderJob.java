@@ -24,14 +24,14 @@ public class SpiderJob {
 	/**
 	 * 抓取普通Webbean
 	 */
-	@Scheduled(cron="0 40 1/5 * * ?")
+//	@Scheduled(cron="0 40 1/5 * * ?")
 	public void spiderWebbean(){
 		spiderwbService.spiderNormalWB();
 	}
 	/**
 	 * 抓取普通Content
 	 */
-	@Scheduled(cron="0 50 1/5 * * ?")
+//	@Scheduled(cron="0 50 1/5 * * ?")
 	public void spiderContent(){
 		spiderContentService.spiderNormalContent();
 	}

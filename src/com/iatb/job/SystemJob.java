@@ -14,7 +14,6 @@ public class SystemJob {
 //	@Scheduled(cron = "0 29 * * * ?") 
 	public void work()
     {
-		System.out.println("sdf");
 		if (logger.isDebugEnabled()) {
 			logger.debug("work() - start"); //$NON-NLS-1$
 		}

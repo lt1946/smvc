@@ -3,6 +3,7 @@ package com.iatb.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import com.iatb.bean.GBean;
 import com.iatb.dao.GbSiteDao;
 import com.iatb.pojo.GbSite;
 import com.iatb.services.GbSiteService;
@@ -57,14 +58,32 @@ public class GbSiteServiceImpl implements GbSiteService {
 	public boolean existApi(int id){
 		return gbSiteDao.count("select count(1) from gb_site where gbsiteid = "+id)>0;
 	}
-	//TODO to serviceImpl template
-	public void update(String name, Object o, int id) {
-		gbSiteDao.execute("update gb_site set "+name+"=? where id=?",new Object[]{o.toString(),id});
+//	public void update(String name, Object o, int id) {
+//		gbSiteDao.execute("update gb_site set "+name+"=? where id=?",new Object[]{o.toString(),id});
+//	}
+	//TODO Later add to serviceImpl template smvc
+	/** 更新字段 */
+	public void update(String name, Object[] o){
+		String ns[]=name.split(",");
+		Object[] obj = new Object[ns.length+1];
+		StringBuffer sql=new StringBuffer("update gb_site set ");
+		for (int j = 0; j < ns.length; j++) {
+			if(j!=ns.length-1)	sql.append(ns[j]+"=?,");
+			else sql.append(ns[j]+"=? ");
+			if (o[j] instanceof Integer) {
+				obj[j]= Integer.valueOf(o[j].toString());
+			}else if (o[j] instanceof String) {
+				obj[j]= o[j].toString();
+			}		//TODO add other obj type. smvc
+		}
+		obj[ns.length]=o[ns.length];
+		sql.append(" where id=?");
+		gbSiteDao.execute(sql.toString(),obj);		
 	}
 	/**
-	 * 重置今天的状态
+	 * 重置今天已经抓取的状态：未抓取0.
 	 */
 	public void updateTodayAll(){
-		gbSiteDao.execute("update gb_site set status=0 where status=10", null);
+		gbSiteDao.execute("update gb_site set status=0 where status="+GBean.STATUS_ALREALDYSIPDER, null);
 	}
 }

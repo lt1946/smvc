@@ -24,7 +24,7 @@ public interface GbSiteService {
 	/** 更新id的状态 */
 	public void updateStatus(int id,int status);
 	/** 更新id的字段name的值 */
-	public void update(String name,Object o,int id);
+	public void update(String name,Object[] o);
 	/** 重置今天的状态 */
 	public void updateTodayAll();
 }

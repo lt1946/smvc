@@ -42,6 +42,65 @@ public class GbGoods  implements Serializable {
 	public GbGoods() {
 		super();
 	}
+	public static GbGoods initSohuGbGoods(String bought,String city,String image,String loc,String price,String rebate,String siteurl,
+			String startTime,String endTime,String title,String value,int siteid,int amount){
+		  GbGoods goods=new GbGoods();	
+		  goods.setValue(bought);
+	      goods.setCity(city);
+	      goods.setMediumimageur(image);
+	      goods.setUrl(loc);
+	      goods.setPrice(price);
+	      goods.setPercent(rebate);
+	      goods.setSiteurl(siteurl);
+	      goods.setStartdate(startTime);
+	      goods.setEnddate(endTime);
+	      goods.setTitle(title);
+	      goods.setValue(value);
+	      goods.setSiteid(siteid);
+	      goods.setAmount(amount);
+	      goods.setCreateTime();
+		  return goods;
+	}
+	public static GbGoods initIndexGbGoods(String bought,String city,String image,String small_image_url,String large_image_url,String loc,
+			  String price,String rebate,String siteurl,	String startTime,String endTime,String title,String value,int siteid,int amount){
+		      GbGoods goods=new GbGoods();
+		      goods.setValue(bought);
+		      goods.setCity(city);
+		      goods.setMediumimageur(image);
+		      goods.setSimageurl(small_image_url);
+		      goods.setLargeimageurl(large_image_url);
+		      goods.setUrl(loc);
+		      goods.setPrice(price);
+		      goods.setPercent(rebate);
+		      goods.setSiteurl(siteurl);
+		      goods.setStartdate(startTime);
+		      goods.setEnddate(endTime);
+		      goods.setTitle(title);
+		      goods.setValue(value);
+		      goods.setPercent(rebate);
+		      goods.setSiteid(siteid);
+		      goods.setAmount(amount);
+		      goods.setCreateTime();
+		      return goods;
+	}
+	public static GbGoods initHao123GbGoods(String bought,String city,String image,String loc,
+			String price,String rebate,String siteurl,	String startTime,String endTime,String title,String value,String website){
+		GbGoods goods=new GbGoods();
+		 goods.setValue(bought);
+	      goods.setCity(city);
+	      goods.setMediumimageur(image);
+	      goods.setEnddate(endTime);
+	      goods.setUrl(loc);
+	      goods.setPrice(price);
+	      goods.setPercent(rebate);
+	      goods.setSiteurl(siteurl);
+	      goods.setStartdate(startTime);
+	      goods.setTitle(title);
+	      goods.setValue(value);
+	      goods.setWebsite(website==null?"":website.length()>10?website.substring(0,10):website);
+	      goods.setCreateTime();
+		return goods;
+	}
 	public GbGoods(int siteid,String url,String title,String simageurl,String mediumimageur,String largeimageurl,int cityid,String startdate,String enddate,String price,String value,int amount,String percent,String website,String expiration,String detail,String updateTime,int isExpired,String cate,String city,String siteurl)
 	{
 		this.siteid = siteid;

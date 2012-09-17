@@ -8,7 +8,10 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -21,6 +24,8 @@ import org.jdom.xpath.XPath;
  */
 public class MyJdom {
 	
+	private static MultiThreadedHttpConnectionManager manager = new MultiThreadedHttpConnectionManager();
+
 	public static void main(String[] args) throws MalformedURLException, JDOMException, IOException {
 		int c=getSizeFromXpath("http://gxtuan.com/api/baidu.php","/urlset/url/loc");
 		System.out.println(c);
@@ -34,7 +39,18 @@ public class MyJdom {
 	public static Element getRoot(String url) {
 			try {
 				SAXBuilder builder = new SAXBuilder();
-				Document doc = builder.build(new URL(url));
+				HttpClient client = new HttpClient(manager);
+				GetMethod get = new GetMethod(url);
+				get.setRequestHeader("User-Agent"," Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; InfoPath.2)");
+				get.setFollowRedirects(true);
+				get.setRequestHeader("Connection"," Keep-Alive");
+				  int statusCode = client.executeMethod(get);
+				   if (statusCode != HttpStatus.SC_OK) {
+					   return null;
+				   }
+				InputStream is=get.getResponseBodyAsStream();
+				Document doc = builder.build(is);
+				is.close();
 				return doc.getRootElement();
 			} catch (Exception e) {
 				return null;

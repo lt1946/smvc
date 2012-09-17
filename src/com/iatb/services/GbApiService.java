@@ -20,8 +20,10 @@ public interface GbApiService {
 	/** 修改 GbApi*/	
 	public boolean updateGbApi(GbApi gbApi);
 	/** 通过siteid获取gbapi */
-	public GbApi loadBySiteid(int gbsiteid);
+	public GbApi GetGbApiFromSiteid(int gbsiteid);
 	/** 更新字段 */
-	public void update(String string, Object i,int id);
+	public void update(String string, Object[] o);
 	public int spider(GbApi api);
+	/**抓取所有gbsiteApi**/
+	public void spiderAllApiFromGbSite();
 }
