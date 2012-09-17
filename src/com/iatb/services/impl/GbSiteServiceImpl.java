@@ -7,6 +7,7 @@ import com.iatb.bean.GBean;
 import com.iatb.dao.GbSiteDao;
 import com.iatb.pojo.GbSite;
 import com.iatb.services.GbSiteService;
+import com.iatb.util.DateUtil;
 
 /**
  * GbSite管理业务逻辑接口实现
@@ -81,9 +82,9 @@ public class GbSiteServiceImpl implements GbSiteService {
 		gbSiteDao.execute(sql.toString(),obj);		
 	}
 	/**
-	 * 重置今天已经抓取的状态：未抓取0.
+	 * 重置除了今天已经抓取的状态：未抓取0.
 	 */
-	public void updateTodayAll(){
-		gbSiteDao.execute("update gb_site set status=0 where status="+GBean.STATUS_ALREALDYSIPDER, null);
+	public void resetStatusButToday(){
+		gbSiteDao.execute("update gb_site set status=0 where status="+GBean.STATUS_ALREALDYSIPDER+" and updateTime not like '%"+DateUtil.getCurrentDate()+"%'" , null);
 	}
 }

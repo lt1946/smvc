@@ -17,12 +17,13 @@ public class GBJob {
 	@Autowired
 	GbGoodsService gbGoodsService;
 	/** 
-	 * 重置今天的状态,未抓取0。  
+	 * 重置除了今天已经抓取的状态：未抓取0.  
 	 * 抓取所有gbsiteApi
 	 */
-	@Scheduled(cron="0 50 * * * ?")
+	@Scheduled(cron="30 56 * * * ?")
 	public void spiderAllApiFromGbSite(){
-		gbSiteService.updateTodayAll();
+		gbSiteService.resetStatusButToday();
 		gbApiService.spiderAllApiFromGbSite();
 	}
+	//TODO  统计购买最多的商品排序，免费商品最多的网站排序，最多的获取标签，各个价格区间的个数，等级排序。smvc
 }

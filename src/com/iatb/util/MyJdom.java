@@ -38,6 +38,7 @@ public class MyJdom {
 	 */
 	public static Element getRoot(String url) {
 			try {
+				if(url.indexOf("www.didatuan.com")!=-1)return null ;	//TODO later java.lang.OutOfMemoryError: Java heap space  smvc
 				SAXBuilder builder = new SAXBuilder();
 				HttpClient client = new HttpClient(manager);
 				GetMethod get = new GetMethod(url);

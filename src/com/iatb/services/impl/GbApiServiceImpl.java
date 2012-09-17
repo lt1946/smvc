@@ -95,8 +95,8 @@ public class GbApiServiceImpl implements GbApiService {
 		  }else {
 			  for (Element display : servlets) {
 				  String loc=display.getChild("Url").getTextTrim();
-				  boolean gg=gbGoodsService.existByUrl(siteid,loc);
-				  if(gg) continue;
+				  boolean gg=gbGoodsService.existByUrl(siteid,loc);		
+				  if(gg) continue;																					//TODO later update 人数 smvc
 			      Element e_website,e_siteurl,e_city,e_title,e_image,e_startTime,e_endTime,e_value,e_price,e_rebate,e_bought,ee;
 			      String website="",siteurl="",city="",title="",image="",startTime="",endTime="",value="",price="",rebate="",bought="",large_image_url="",small_image_url="";
 			      int amount=0;
@@ -128,7 +128,7 @@ public class GbApiServiceImpl implements GbApiService {
 				  for (Element display : servlets) {
 					   String loc=display.getChild("link").getTextTrim();
 					   boolean gg=gbGoodsService.existByUrl(siteid,loc);
-					   if(gg) continue;
+					   if(gg) continue;																			//TODO later update 人数 smvc
 	//				  Element display = url.getChild("data").getChild("display");
 				      Element e_website,e_siteurl,e_city,e_title,e_image,e_startTime,e_endTime,e_value,e_price,e_rebate,e_bought,ee;
 				      String website="",siteurl="",city="",title="",image="",startTime="",endTime="",value="",price="",rebate="",bought="",large_image_url="",small_image_url="";
@@ -185,7 +185,7 @@ public class GbApiServiceImpl implements GbApiService {
 		  }else  for (Element url : servlets) {
 		      String loc=url.getChild("loc").getTextTrim();
 		      boolean gg=gbGoodsService.existByUrl(siteid,loc);
-		      if(gg) continue;
+		      if(gg) continue;																	//TODO later update 人数 smvc
 		      Element display = url.getChild("data").getChild("display");
 		      Element e_website,e_siteurl,e_city,e_title,e_image,e_startTime,e_endTime,e_value,e_price,e_rebate,e_bought;
 		      String website="",siteurl="",city="",title="",image="",startTime="",endTime="",value="",price="",rebate="",bought="";
