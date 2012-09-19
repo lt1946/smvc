@@ -282,8 +282,13 @@ public class GbApiServiceImpl implements GbApiService {
 			}
 			update("status",new Object[]{GBean.STATUS_STOP,gbapid});
 		}
-		if(apigoods<=-5){		level+=-1;		} else if(apigoods>=5){	level+=1;	}			/**连续5天没新商品,更新level**/
-		gbSiteService.update("level",new Object[]{level,gbsiteid});
+		if(apigoods<=-5){				/**更新level，连续5天有或没新商品！**/
+			level+=-1;	
+			gbSiteService.update("level,goods",new Object[]{level,0,gbsiteid});
+		} else if(apigoods>=5){	
+			level+=1;
+			gbSiteService.update("level,goods",new Object[]{level,0,gbsiteid});
+		}
 		gbSiteService.updateStatus(gbsiteid, GBean.API_STATUS_ALREADLYSPIDER);
 	}
 }
