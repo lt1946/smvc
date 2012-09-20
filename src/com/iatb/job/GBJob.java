@@ -20,7 +20,7 @@ public class GBJob {
 	 * 重置除了今天已经抓取的状态：未抓取0.  
 	 * 抓取所有gbsiteApi
 	 */
-	@Scheduled(cron="30 56 * * * ?")
+	@Scheduled(cron="30 10 22 * * ?")
 	public void spiderAllApiFromGbSite(){
 		gbSiteService.resetStatusButToday();
 		gbApiService.spiderAllApiFromGbSite();

@@ -1,0 +1,15 @@
+package $classPackage;
+
+import com.iatb.util.DateUtil;
+import org.apache.struts.action.ActionForm;
+
+/**
+ * @Author Administrator
+ * @Date $date
+ */
+
+@SuppressWarnings("serial")
+public class $className extends ActionForm {
+	$columns
+	$gets
+}

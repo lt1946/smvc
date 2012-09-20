@@ -1,0 +1,140 @@
+package $classPackage;
+
+import java.sql.Connection;
+import java.util.List;
+import java.util.Map;
+import org.apache.log4j.Logger;
+import $TableBeanPackageName;
+import $ConnToolspackageName;
+
+/**
+ * @author Administrator
+ * @since  $date
+ */
+public class $DaoIpmlName {
+	
+	private static final Logger log=Logger.getLogger($DaoIpmlName.class);
+	private static Connection  conn=ConnTools.makeConnection("$dbName");
+	public static void main(String[] args) {
+	}
+	/**
+	 * 添加
+	 * @param $Tablename
+	 */
+	public static String add($TableBeanName $TableAsila){
+		String sql="insert into $Tablename $insertColumn";
+		Object o[]=new Object[]{$ColumnGet};
+		int i=ConnTools.update(conn, sql, o);
+		log.info("添加$TableAsila:"+(i>0?"成功":"失败"));
+		return ("添加$TableAsila:"+(i>0?"成功":"失败"));
+	}
+	/**
+	 * 查询
+	 * @param id
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<$TableBeanName> query(int id)
+	{
+		return ConnTools.query(conn, "select * from $Tablename where id="+id,$TableBeanName.class);
+	}
+	/**
+	 * 查询结果集
+	 * @param num $ColumnList
+	 * @param value
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<$TableBeanName> queryList(int num,int value)
+	{
+		if(num>$ColumnLength||num<1)return null;
+		String name="";
+		boolean b1=false;
+		switch(num){
+			$ColumnSwitch
+		};
+		String sql="select * from $Tablename where "+name+(b1?"=":"='")+value+(b1?"":"'");
+		log.info(sql);
+		return ConnTools.query(conn, sql,$TableBeanName.class);
+	}
+	
+	/**
+	 * 分页查询
+	 * @param num	个数
+	 * @param pre	开始页数
+	 * @return	
+	 */
+	public static List<Map<String ,Object>> query(int num,int pre){
+		return ConnTools.queryMap(conn, "select * from $Tablename where status=0 order by id asc limit "+(pre<0?0:pre)+","+num);
+	}
+	/**
+	 * 更新id中num属性值为value
+	 * @param id
+	 * @param name
+	 * @param value
+	 */
+	public static void updateName(int id,String name,String value){
+		String sql="update $Tablename set `"+name+"`=? where id=?";
+		int i=ConnTools.update(conn, sql, new Object[]{value,id});
+		log.info("更新："+name+(i==1?"成功":"失败"));
+	}
+	/**
+	 * 判断sql是否存在
+	 * @param sql
+	 * @return
+	 */
+	public static boolean exists(String sql){
+		return ConnTools.count(sql,null)>0?true:false;
+	}
+	/**
+	 * 判断num属性值value是否存在,返回id;  
+	 * @param num	($ColumnList)
+	 * @param value	
+	 * @return 
+	 */
+	public static int isExists(int num,String value){
+		if(num>$ColumnLength||num<1)return -1;
+		String name="";
+		boolean b1=false;
+		switch(num){
+			$ColumnSwitch
+		};
+		String sql="select id from $Tablename where "+name+(b1?"=":"='")+value+(b1?"":"'");
+		log.info(sql);
+		List<Map<String ,Object>> m=ConnTools.queryMap(conn, sql);
+		if(m==null||m.size()==0)return -1;
+		int i=(Integer) m.get(0).get("id");
+		return i>0?i:-1;
+	}
+	/**
+	 * 更新
+	 * @param id
+	 * @return
+	 */
+	public static void update(String sql){
+		int i=ConnTools.update2(conn, sql);
+		log.info("更新："+sql+(i>=0?"成功":"失败"));
+	}
+	/**
+	 * 查询sql
+	 * @param id
+	 * @return List
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<$TableBeanName> query(String sql){
+		return ConnTools.query(conn, sql,$TableBeanName.class);
+	}
+	/**
+	 * 统计总个数
+	 */
+	public int getAllCount() {
+		List<Map<String,Object>> list = ConnTools.queryMap( conn, "select count(1) b from $Tablename where status=0 ");
+		return Integer.parseInt(list.get(0).get("b").toString());
+	}
+	/**
+	 * 删除标记id
+	 */
+	public String del(int id) {
+		return  "删除"+(ConnTools.update2(conn,"update $Tablename set status=1 where id="+id)>0?"成功":"失败");
+	}
+}

@@ -1,0 +1,13 @@
+package _$classPackage_;
+
+import com.iatb.util.DateUtil;
+import java.io.Serializable;
+
+/**
+ * @Author Administrator
+ * @Date _$date_
+ */
+public class _$className_  implements Serializable {
+	_$columns_
+	_$gets_
+}
